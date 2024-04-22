@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>공학용 계산기</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .calculator {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+            width: 320px;
+        }
+
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        input[type="text"] {
+            grid-column: 1 / span 4;
+            width: 100%;
+            padding: 15px;
+            font-size: 1.5rem;
+            text-align: right;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        button {
+            padding: 15px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 5px;
+            background-color: #007BFF;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body>
+
+<div class="calculator">
+    <input type="text" id="expression" placeholder="계산식을 입력하세요" readonly>
+    <div class="calculator-grid">
+        <button onclick="addToExpression('(')">(</button>
+        <button onclick="addToExpression(')')">)</button>
+        <button onclick="addToExpression('%')">%</button>
+        <button onclick="addToExpression('/')">÷</button>
+
+        <button onclick="addToExpression('7')">7</button>
+        <button onclick="addToExpression('8')">8</button>
+        <button onclick="addToExpression('9')">9</button>
+        <button onclick="addToExpression('*')">x</button>
+
+        <button onclick="addToExpression('4')">4</button>
+        <button onclick="addToExpression('5')">5</button>
+        <button onclick="addToExpression('6')">6</button>
+        <button onclick="addToExpression('-')">-</button>
+
+        <button onclick="addToExpression('1')">1</button>
+        <button onclick="addToExpression('2')">2</button>
+        <button onclick="addToExpression('3')">3</button>
+        <button onclick="addToExpression('+')">+</button>
+
+        <button onclick="addToExpression('0')">0</button>
+        <button onclick="addToExpression('.')">.</button>
+        <button onclick="clearExpression()">C</button>
+        <button onclick="calculate()">=</button>
+    </div>
+</div>
+
+<script>
+    function addToExpression(value) {
+        const expression = document.getElementById('expression');
+        expression.value += value;
+    }
+
+    function clearExpression() {
+        const expression = document.getElementById('expression');
+        expression.value = '';
+    }
+
+    function calculate() {
+        try {
+            const expression = document.getElementById('expression').value;
+            const result = eval(expression);
+            document.getElementById('expression').value = result;
+        } catch (error) {
+            alert('계산식이 올바르지 않습니다.');
+        }
+    }
+</script>
+
+</body>
+</html>
